@@ -14,7 +14,7 @@ public class ImageViewer extends JComponent {
 
 	private static final long serialVersionUID = 1L;
 	protected BufferedImage img = null;
-	final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter(
+	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter(
 			"Images", "jpg", "gif", "png");
 	protected JFileChooser fc;
 	protected final JFrame frame;
@@ -38,22 +38,31 @@ public class ImageViewer extends JComponent {
 	public void paint(Graphics g) {
 		g.drawImage(img, 0, 0, null);
 	}
-	
+
 	private int getImageHeight() {
-		return img.getWidth();
+		if (img == null) {
+			return 0;
+		} else {
+			return img.getHeight();
+		}
 	}
 
 	private int getImageWidth() {
-		return img.getWidth();
+		if (img == null) {
+			return 0;
+		} else {
+			return img.getWidth();
+		}
 	}
 
 	public static void main(String[] args) {
 		JFrame myFrame = new JFrame("Image Viewer");
 		ImageViewer viewer = new ImageViewer(myFrame);
+
 		viewer.loadImage();
 		myFrame.add(viewer);
+
 		myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
 		myFrame.setVisible(true);
-
 	}
 }
