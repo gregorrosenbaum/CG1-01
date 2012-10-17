@@ -10,35 +10,55 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+//Subklasse von JComponent, damit sie relativ leicht überall eingebunden werden kann
 public class ImageViewer extends JComponent {
 
+	// //!!!!TODO: JMenuBar mit Option "Bild laden" hinzufügen (loadImage() benutzen) !!!!!!
+
 	private static final long serialVersionUID = 1L;
-	protected BufferedImage img = null;
-	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter(
-			"Images", "jpg", "gif", "png");
-	protected JFileChooser fc;
+
+	// Variablen des ImageViewers //
+	// Der Behälter für unser Bild
+	protected BufferedImage img;
+	// Dialog-Fenster zum auswählen einer Datei
+	protected JFileChooser fileDialog;
+	// Filter für erlaubte Bildformate im fileDialog
+	// // TODO: Bildformate zum FILTER hinzufügen
+	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter("Images",
+			"jpg", "gif", "png");
+
+	// Variablen unseres Testprogramms //
 	protected final JFrame frame;
 
 	public ImageViewer(JFrame frame) {
 		this.frame = frame;
-		fc = new JFileChooser();
-		fc.setFileFilter(FILTER);
+		fileDialog = new JFileChooser();
+		fileDialog.setFileFilter(FILTER);
 	}
 
 	public void loadImage() {
-		if (fc.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+		if (fileDialog.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+			// Wenn ein Bild ausgewählt wird
 			try {
-				img = ImageIO.read(fc.getSelectedFile());
+				img = ImageIO.read(fileDialog.getSelectedFile());
 			} catch (IOException e) {
+				// falls es einen Fehler beim Laden gibt, wird der Dialog einfach neu angezeigt
+				// //TODO: kann man das eleganter machen? Vielleicht vorher eine Fehlermeldung (Popup)?
 				loadImage();
 			}
+		} else {
+			// Wenn kein Bild ausgewählt wird
+			// // TODO: Was passiert wenn kein Bild ausgewählt wird?
 		}
 	}
 
+	// überschreibt die paint-Methode von Component, so dass das Bild gezeichnet wird
+	@Override
 	public void paint(Graphics g) {
 		g.drawImage(img, 0, 0, null);
 	}
 
+	// liefert die Höhe unseres Bildes oder 0, wenn es nicht existiert
 	private int getImageHeight() {
 		if (img == null) {
 			return 0;
@@ -47,6 +67,7 @@ public class ImageViewer extends JComponent {
 		}
 	}
 
+	// liefert die Breite unseres Bildes oder 0, wenn es nicht existiert
 	private int getImageWidth() {
 		if (img == null) {
 			return 0;
