@@ -2,9 +2,10 @@ package a1;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+
+//TODO: !!!!!!! SAVE-Funktion einbauen (mit Menü)!!!!!!
 
 public class ImageSaver {
 
@@ -12,36 +13,42 @@ public class ImageSaver {
 	protected final static int OFFSET_Y = 35;
 
 	public static void main(String[] args) {
-		JFrame myFrame = new JFrame("Image Saver");
+		final JFrame myFrame = new JFrame("Image Saver");
 
-		final BufferedImage img = new BufferedImage(500, 500, BufferedImage.TYPE_INT_RGB);
+		final ImageCanvas ic = new ImageCanvas();
+
+		myFrame.add(ic);
+
 		myFrame.addComponentListener(new ComponentListener() {
-			public void componentResized(ComponentEvent evt) {
-				drawLine(img, 500, 500);
+
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+
 			}
 
 			@Override
-			public void componentHidden(ComponentEvent arg0) {}
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+
+			}
 
 			@Override
-			public void componentMoved(ComponentEvent arg0) {}
+			public void componentResized(ComponentEvent e) {
+				ic.setWidth(myFrame.getWidth());
+				ic.setHeight(myFrame.getHeight());
+				ic.repaint();
+			}
 
 			@Override
-			public void componentShown(ComponentEvent arg0) {}
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+
+			}
 		});
-
-		drawLine(img, 500, 500);
-
-		myFrame.add(new ImageCanvas(img));
 
 		myFrame.setSize(500 + 15, 500 + 35);
 		myFrame.setVisible(true);
 
-	}
-
-	private static void drawLine(BufferedImage img, int width, int height) {
-		for (int x = 0; x < width; x++) {
-			img.setRGB(x, x, 0xFF00FF00);
-		}
 	}
 }
