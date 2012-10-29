@@ -4,6 +4,21 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.WritableRaster;
+
+/**
+ * A wrapper that contains a {@link BufferedImage} which is manipulated not by {@code Graphics} but
+ * by accessing the pixels in the raster.
+ * 
+ * @see WritableRaster
+ * @see ColorModel
+ * @see BufferedImage
+ * 
+ * @author Johann Hofmann
+ * @author Gregor Rosenbaum
+ * @author Anton Krebs
+ */
 
 public class ImageCanvas extends Canvas {
 
@@ -14,58 +29,104 @@ public class ImageCanvas extends Canvas {
 	protected int height;
 	protected Color color;
 
+	/**
+	 * Creates the ImageCanvas with the specified width and height. The default color will be set to
+	 * {@code red}.
+	 * 
+	 * @param width
+	 *            the width of the image.
+	 * @param height
+	 *            the height of the image.
+	 */
 	public ImageCanvas(int width, int height) {
 		this(width, height, Color.red);
 	}
-	
-	public ImageCanvas (int width, int height, Color color){
+
+	/**
+	 * Creates the ImageCanvas with the specified width and height and the specified color to draw.
+	 * 
+	 * @param width
+	 *            the width of the image.
+	 * @param height
+	 *            the height of the image.
+	 * @param color
+	 *            the color to draw with.
+	 */
+	public ImageCanvas(int width, int height, Color color) {
 		this.width = width;
 		this.height = height;
 		this.color = color;
 	}
-	
+
 	@Override
 	public void paint(final Graphics g) {
 		// erzeugt ein neues BufferedImage mit dem Farbtyp INT RGB
 		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
 		for (int x = 0; x < height && x < width; x++) {
-			// setzt einen Punkt (Pixel) des Rasters mit den Koordinaten x,x auf die angegebene Farbe
+			// setzt einen Punkt des Rasters mit den Koordinaten x,x auf die angegebene Farbe
 			img.getRaster().setDataElements(x, x, img.getColorModel().getDataElements(color.getRGB(), null));
 		}
 
 		g.drawImage(img, 0, 0, null);
 	}
 
+	@Override
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * Sets the width of the image. You need to redraw to change the image.
+	 * 
+	 * @param width
+	 *            the width of the image.
+	 */
 	public void setWidth(final int width) {
 		this.width = width;
 	}
 
+	@Override
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * Sets the height of the image. You need to redraw to change the image.
+	 * 
+	 * @param height
+	 *            the height of the image.
+	 */
 	public void setHeight(final int height) {
 		this.height = height;
 	}
 
+	/**
+	 * Gets the color of the image.
+	 * 
+	 * @return the {@link Color} of the image.
+	 */
 	public Color getColor() {
 		return color;
 	}
 
-	// TODO: im ImageSaver einen Men�punkt implementieren, mit dem man die Farbe wechseln kann
+	/**
+	 * Sets the color of the image
+	 * 
+	 * @param color
+	 *            the {@link Color} of the image.
+	 */
 	public void setColor(final Color color) {
 		this.color = color;
 	}
 
+	/**
+	 * Gets the BufferedImage in the {@link ImageCanvas}.
+	 * 
+	 * @return the {@link BufferedImage} in the {@link ImageCanvas}.
+	 */
 	public BufferedImage getImage() {
 		return img;
 	}
 
-
 }
-
