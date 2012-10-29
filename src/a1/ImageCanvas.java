@@ -9,7 +9,7 @@ public class ImageCanvas extends Canvas {
 
 	private static final long serialVersionUID = 5555522598959749695L;
 
-	protected static BufferedImage img;
+	protected BufferedImage img;
 	protected int width;
 	protected int height;
 	protected Color color;
@@ -64,7 +64,7 @@ public class ImageCanvas extends Canvas {
 		this.color = color;
 	}
 
-	public static BufferedImage getImg() {
+	public BufferedImage getImg() {
 		return img;
 	}
 

@@ -1,14 +1,11 @@
 package a1;
 
+import java.awt.Image;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -18,16 +15,8 @@ import javax.swing.JMenuItem;
 
 public class ImageSaver {
 	
-	public ImageSaver(){
-		try {
-	    // retrieve image
-	    BufferedImage bi = ImageCanvas.getImg();
-	    File outputfile = new File("saved.png");
-	    ImageIO.write(bi, "png", outputfile);
-	} catch (IOException e) {
-	    // Kann nicht gespeichert werden
-		System.out.println("Bild konnte nicht gespeichert werden");
-	}
+	public void SafeImage(Image img){
+	
 	}
 
 	public static void main(String[] args) {
@@ -89,8 +78,8 @@ public class ImageSaver {
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				
-				myFrame.repaint();
+
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
 				
 			}
 
@@ -107,6 +96,8 @@ public class ImageSaver {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				//SafeImage...
+				
 					
 			}});	
 		
