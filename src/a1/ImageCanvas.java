@@ -9,7 +9,7 @@ public class ImageCanvas extends Canvas {
 
 	private static final long serialVersionUID = 5555522598959749695L;
 
-	protected BufferedImage img;
+	protected static BufferedImage img;
 	protected int width;
 	protected int height;
 	protected Color color;
@@ -23,7 +23,9 @@ public class ImageCanvas extends Canvas {
 		this.height = height;
 		this.color = color;
 	}
-
+	
+	
+	
 	@Override
 	public void paint(final Graphics g) {
 		// erzeugt ein neues BufferedImage mit dem Farbtyp INT RGB
@@ -61,6 +63,11 @@ public class ImageCanvas extends Canvas {
 	public void setColor(final Color color) {
 		this.color = color;
 	}
+
+	public static BufferedImage getImg() {
+		return img;
+	}
+
 
 }
 
