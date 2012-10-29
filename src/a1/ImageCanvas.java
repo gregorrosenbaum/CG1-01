@@ -12,13 +12,20 @@ public class ImageCanvas extends Canvas {
 	protected BufferedImage img;
 	protected int width;
 	protected int height;
-	protected Color color = Color.red;
+	protected Color color;
 
 	// TODO: Konstruktor konstruieren, mit dem auch die Farbe bestimmt werden kann
 
 	public ImageCanvas(int width, int height) {
 		this.width = width;
 		this.height = height;
+		this.color = Color.red;
+	}
+	
+	public ImageCanvas (int width, int height, Color color){
+		this.width = width;
+		this.height = height;
+		this.color = color;
 	}
 
 	@Override
