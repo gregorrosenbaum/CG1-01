@@ -46,6 +46,7 @@ public class ImageViewer extends JComponent  {
 			} catch (IOException e) {
 				// falls es einen Fehler beim Laden gibt, wird der Dialog einfach neu angezeigt
 				// //TODO: kann man das eleganter machen? Vielleicht vorher eine Fehlermeldung (Popup)?
+				JOptionPane.showMessageDialog(frame, "Fehler bei Dateiauswahl");
 				loadImage();
 			}
 		} else {
