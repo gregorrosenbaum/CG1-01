@@ -2,8 +2,13 @@ package a1;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 //TODO: !!!!!!! SAVE-Funktion einbauen (mit Menü)!!!!!!
 
@@ -48,6 +53,48 @@ public class ImageSaver {
 
 		myFrame.setSize(WIDTH, HEIGHT);
 		myFrame.setVisible(true);
+		
+		JMenuBar menubar = new JMenuBar();
+		myFrame.setJMenuBar(menubar);
+	
+
+		JMenu datei = new JMenu("Datei");
+		menubar.add(datei);
+		JMenuItem dateispeichern = new JMenuItem("Datei speichern");
+		datei.add(dateispeichern);
+	
+		dateispeichern.addMouseListener(new MouseListener (){
+
+			@Override
+			public void mouseClicked(MouseEvent e) { 
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+				myFrame.repaint();
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+				
+			}
+
+			public void mousePressed(MouseEvent e) {
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+					
+			}});	
+		
+
 
 	}
 }
