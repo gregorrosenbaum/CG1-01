@@ -24,6 +24,7 @@ public class ImageCanvas extends Canvas {
 
 	private static final long serialVersionUID = 5555522598959749695L;
 
+	// our variables can be changed therefore are not static
 	protected BufferedImage img;
 	protected int width;
 	protected int height;

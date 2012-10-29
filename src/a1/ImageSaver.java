@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 /**
  * A little application that uses {@link ImageCanvas} and {@link ImageIO#write()} to create an image
- * and save it wherever the user decides
+ * and save it wherever the user decides.
  * 
  * @author Johann Hofmann
  * @author Gregor Rosenbaum

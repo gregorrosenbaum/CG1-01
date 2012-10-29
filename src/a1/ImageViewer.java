@@ -22,7 +22,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * <p>
  * After creating a new ImageViewer, you should load an image using {@link #loadImage()}
  * 
- * 
  * @author Johann Hofmann
  * @author Gregor Rosenbaum
  * @author Anton Krebs
