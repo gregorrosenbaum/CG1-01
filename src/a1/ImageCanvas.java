@@ -14,12 +14,8 @@ public class ImageCanvas extends Canvas {
 	protected int height;
 	protected Color color;
 
-	// TODO: Konstruktor konstruieren, mit dem auch die Farbe bestimmt werden kann
-
 	public ImageCanvas(int width, int height) {
-		this.width = width;
-		this.height = height;
-		this.color = Color.red;
+		this(width, height, Color.red);
 	}
 	
 	public ImageCanvas (int width, int height, Color color){
