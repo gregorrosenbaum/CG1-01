@@ -1,8 +1,6 @@
 package a1;
 
 import java.awt.Graphics;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -15,13 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.event.MenuKeyListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 //Subklasse von JComponent, damit sie relativ leicht überall eingebunden werden kann
 public class ImageViewer extends JComponent  {
-
-	// //!!!!TODO: JMenuBar mit Option "Bild laden" hinzufügen (loadImage() benutzen) !!!!!!
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +26,6 @@ public class ImageViewer extends JComponent  {
 	// Dialog-Fenster zum auswählen einer Datei
 	protected final JFileChooser fileDialog;
 	// Filter für erlaubte Bildformate im fileDialog
-	// // TODO: Bildformate zum FILTER hinzufügen
 	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter("Images",
 			"jpg", "gif", "png", "bmp", "tif", "ami", "apx", "bmp", "brk", "bw", "cal", "cbm", "cbr","cbz", "cpt", "cur", "dds", "dng", "exr", "fif", "fpx");
 
@@ -106,39 +100,37 @@ public class ImageViewer extends JComponent  {
 		bildLaden.addMouseListener(new MouseListener (){
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
+			public void mouseClicked(MouseEvent e) { 
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
 				
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 				viewer.loadImage();
+				myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
+				myFrame.repaint();
 				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
 				
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
 				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
+					
 			}});
 		
-		myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
-		myFrame.repaint();
-		
+
 	
 		
 		
