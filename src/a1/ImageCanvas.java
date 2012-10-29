@@ -59,12 +59,12 @@ public class ImageCanvas extends Canvas {
 		return color;
 	}
 
-	// TODO: im ImageSaver einen Menüpunkt implementieren, mit dem man die Farbe wechseln kann
+	// TODO: im ImageSaver einen Menï¿½punkt implementieren, mit dem man die Farbe wechseln kann
 	public void setColor(final Color color) {
 		this.color = color;
 	}
 
-	public BufferedImage getImg() {
+	public BufferedImage getImage() {
 		return img;
 	}
 
