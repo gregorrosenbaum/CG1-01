@@ -41,88 +41,98 @@ public class ImageSaver {
 
 	public static void main(String[] args) {
 
-		// unsere hoehe und breite des Fensters
+		// our application window's height and width
 		final int WIDTH = 640;
 		final int HEIGHT = 480;
 
+		// our application window
 		final JFrame myFrame = new JFrame("Image Saver");
+		myFrame.setSize(WIDTH, HEIGHT);
 
+		// adds our new canvas to the frame
 		final ImageCanvas canvas = new ImageCanvas(WIDTH, HEIGHT);
-
 		myFrame.add(canvas);
 
+		// we add a Listener to adjust the image when the user resizes the window
 		myFrame.addComponentListener(new ComponentListener() {
 
 			@Override
 			public void componentHidden(ComponentEvent e) {
-				// Hier passiert nichts, muss fuer den Listener aber ueberschrieben werden
+				// not used but necessary for the Listener
 			}
 
 			@Override
 			public void componentMoved(ComponentEvent e) {
-				// Hier passiert nichts, muss fuer den Listener aber ueberschrieben werden
+				// not used but necessary for the Listener
 			}
 
 			@Override
 			public void componentResized(ComponentEvent e) {
+				// sets width and height of our image(canvas) to the dimensions of the frame
 				canvas.setWidth(myFrame.getWidth());
 				canvas.setHeight(myFrame.getHeight());
-				canvas.repaint();
 			}
 
 			@Override
 			public void componentShown(ComponentEvent e) {
-				// Hier passiert nichts, muss fuer den Listener aber ueberschrieben werden
+				// not used but necessary for the Listener
 			}
 		});
 
-		myFrame.setSize(WIDTH, HEIGHT);
-		myFrame.setVisible(true);
+		// adds our Menu Datei->Speichern to save the file
 
 		final JMenuBar menuBar = new JMenuBar();
 		myFrame.setJMenuBar(menuBar);
 
 		final JMenu file = new JMenu("Datei");
 		menuBar.add(file);
-		final JMenuItem saveFile = new JMenuItem("Datei speichern");
+
+		final JMenuItem saveFile = new JMenuItem("Speichern");
 		file.add(saveFile);
 
+		// the dialog to select the save destination
 		final JFileChooser fileDialog = new JFileChooser();
 
+		// listens if the menu item was clicked
 		saveFile.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// wird nicht genutzt, aber wird benoetigt um den MouseListener zu erstellen
+				// not used but necessary for the Listener
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// wird nicht genutzt, aber wird benoetigt um den MouseListener zu erstellen
+				// not used but necessary for the Listener
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// wird nicht genutzt, aber wird benoetigt um den MouseListener zu erstellen
+				// not used but necessary for the Listener
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// wird nicht genutzt, aber wird benoetigt um den MouseListener zu erstellen
+				// not used but necessary for the Listener
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				// if the filedialog returns that the user clicked "ok"
 				if (fileDialog.showSaveDialog(myFrame) == JFileChooser.APPROVE_OPTION) {
 					try {
 						saveImageToPng(canvas.getImage(), fileDialog.getSelectedFile());
 					} catch (IOException exception) {
+						// messagebox alerts the user in case of an error
 						JOptionPane.showMessageDialog(myFrame, "Fehler bei Dateiauswahl. Datei nicht gespeichert.");
 					}
 				}
 
 			}
 		});
+
+		// shows the application
+		myFrame.setVisible(true);
 
 	}
 }

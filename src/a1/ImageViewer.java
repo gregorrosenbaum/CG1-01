@@ -31,6 +31,67 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 // Subklasse von JComponent, damit sie relativ leicht überall eingebunden werden kann
 public class ImageViewer extends JComponent {
 
+	// diese main ist zum vorführen. ImageViewer kann (und sollte) auch ohne sie benutzt werden
+	public static void main(String[] args) {
+		// erstellen des fensters und des viewers
+		final JFrame myFrame = new JFrame("Image Viewer");
+		final ImageViewer viewer = new ImageViewer(myFrame);
+
+		viewer.loadImage();
+		myFrame.add(viewer);
+
+		myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
+		myFrame.setVisible(true);
+
+		// wir erstellen ein Menü um ein neues Bild laden zu können
+
+		final JMenuBar menuBar = new JMenuBar();
+		myFrame.setJMenuBar(menuBar);
+
+		final JMenu newImageMenu = new JMenu("Neues Bild");
+		menuBar.add(newImageMenu);
+		final JMenuItem loadImageButton = new JMenuItem("Bild laden");
+		newImageMenu.add(loadImageButton);
+
+		// schaut wann "bild laden" gedrückt wurde
+		loadImageButton.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				viewer.loadImage();
+				// passt die größe des frames an das bild an
+				myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
+				// der frame muss repainted werden um die größe anzupassen
+				myFrame.repaint();
+			}
+		});
+	}
+
+	// ///////////////////////ANFANG KLASSE//////////////////////////////// //
+
 	private static final long serialVersionUID = 1L;
 
 	// Variablen des ImageViewers //
@@ -46,6 +107,9 @@ public class ImageViewer extends JComponent {
 
 	/**
 	 * Creates an ImageViewer that belongs to the given {@link Window}.
+	 * 
+	 * @param frame
+	 *            a {@link Window} Object to contain the image.
 	 */
 
 	public ImageViewer(final Window frame) {
@@ -55,13 +119,16 @@ public class ImageViewer extends JComponent {
 	}
 
 	/**
-	 * Causes the ImageViewer to show a {@link JFileChooser} and replace the image with the selected File.
+	 * Causes the ImageViewer to show a {@link JFileChooser} and replace the image with the selected
+	 * File.
 	 * <p>
 	 * If the File cannot be found, a {@link JOptionPane}-warning is shown.
 	 * <p>
-	 * A {@link FileNameExtensionFilter} is used to filter the selection of shown files in the dialog.
+	 * A {@link FileNameExtensionFilter} is used to filter the selection of shown files in the
+	 * dialog.
 	 * 
-	 * If the user cancels the first filedialog or manages to select a non-image file, the image will be empty.
+	 * If the user cancels the first filedialog or manages to select a non-image file, the image
+	 * will be empty.
 	 * 
 	 */
 
@@ -118,56 +185,50 @@ public class ImageViewer extends JComponent {
 		}
 	}
 
-	public static void main(String[] args) {
-		final JFrame myFrame = new JFrame("Image Viewer");
-		final ImageViewer viewer = new ImageViewer(myFrame);
-
-		JMenuBar menubar = new JMenuBar();
-		myFrame.setJMenuBar(menubar);
-
-		viewer.loadImage();
-		myFrame.add(viewer);
-
-		myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
-		myFrame.setVisible(true);
-
-		JMenu newImageMenu = new JMenu("Neues Bild");
-		menubar.add(newImageMenu);
-		JMenuItem loadImageButton = new JMenuItem("Bild laden");
-		newImageMenu.add(loadImageButton);
-
-		loadImageButton.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				viewer.loadImage();
-				myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
-				myFrame.repaint();
-			}
-		});
-
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fileDialog == null) ? 0 : fileDialog.hashCode());
+		result = prime * result + ((frame == null) ? 0 : frame.hashCode());
+		result = prime * result + ((img == null) ? 0 : img.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		ImageViewer other = (ImageViewer) obj;
+		if (fileDialog == null) {
+			if (other.fileDialog != null) {
+				return false;
+			}
+		} else if (!fileDialog.equals(other.fileDialog)) {
+			return false;
+		}
+		if (frame == null) {
+			if (other.frame != null) {
+				return false;
+			}
+		} else if (!frame.equals(other.frame)) {
+			return false;
+		}
+		if (img == null) {
+			if (other.img != null) {
+				return false;
+			}
+		} else if (!img.equals(other.img)) {
+			return false;
+		}
+		return true;
+	}
+
 }

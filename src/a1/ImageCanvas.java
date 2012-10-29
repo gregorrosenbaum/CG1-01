@@ -77,13 +77,14 @@ public class ImageCanvas extends Canvas {
 	}
 
 	/**
-	 * Sets the width of the image. You need to redraw to change the image.
+	 * Sets the width of the image. Redraws the {@link ImageCanvas} for the changes to show.
 	 * 
 	 * @param width
 	 *            the width of the image.
 	 */
 	public void setWidth(final int width) {
 		this.width = width;
+		repaint();
 	}
 
 	@Override
@@ -92,13 +93,14 @@ public class ImageCanvas extends Canvas {
 	}
 
 	/**
-	 * Sets the height of the image. You need to redraw to change the image.
+	 * Sets the height of the image. Redraws the {@link ImageCanvas} for the changes to show.
 	 * 
 	 * @param height
 	 *            the height of the image.
 	 */
 	public void setHeight(final int height) {
 		this.height = height;
+		repaint();
 	}
 
 	/**
@@ -127,6 +129,48 @@ public class ImageCanvas extends Canvas {
 	 */
 	public BufferedImage getImage() {
 		return img;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + height;
+		result = prime * result + ((img == null) ? 0 : img.hashCode());
+		result = prime * result + width;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ImageCanvas other = (ImageCanvas) obj;
+		if (color == null) {
+			if (other.color != null)
+				return false;
+		} else if (!color.equals(other.color))
+			return false;
+		if (height != other.height)
+			return false;
+		if (img == null) {
+			if (other.img != null)
+				return false;
+		} else if (!img.equals(other.img))
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ImageCanvas (" + width + "x" + height + ")";
 	}
 
 }
