@@ -1,6 +1,8 @@
 package a1;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -14,9 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 //Subklasse von JComponent, damit sie relativ leicht überall eingebunden werden kann
-public class ImageViewer extends JComponent {
-
-	// //!!!!TODO: JMenuBar mit Option "Bild laden" hinzufügen (loadImage() benutzen) !!!!!!
+public class ImageViewer extends JComponent  {
 
 	private static final long serialVersionUID = 1L;
 
@@ -26,8 +26,8 @@ public class ImageViewer extends JComponent {
 	// Dialog-Fenster zum auswählen einer Datei
 	protected final JFileChooser fileDialog;
 	// Filter für erlaubte Bildformate im fileDialog
-	// // TODO: Bildformate zum FILTER hinzufügen
-	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
+	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter("Images",
+			"jpg", "gif", "png", "bmp", "tif", "ami", "apx", "bmp", "brk", "bw", "cal", "cbm", "cbr","cbz", "cpt", "cur", "dds", "dng", "exr", "fif", "fpx");
 
 	// Variablen unseres Testprogramms //
 	protected final JFrame frame;
@@ -85,19 +85,52 @@ public class ImageViewer extends JComponent {
 		JMenuBar menubar = new JMenuBar();
 		myFrame.setJMenuBar(menubar);
 		
-
 		viewer.loadImage();
 		myFrame.add(viewer);
 
 		myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
 		myFrame.setVisible(true);
 
-		
 		JMenu neuesBild = new JMenu("Neues Bild");
 		menubar.add(neuesBild);
 		JMenuItem bildLaden = new JMenuItem("Bild laden");
 		neuesBild.add(bildLaden);
 		
+	
+		bildLaden.addMouseListener(new MouseListener (){
+
+			@Override
+			public void mouseClicked(MouseEvent e) { 
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				viewer.loadImage();
+				myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
+				myFrame.repaint();
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				//wird nicht genutzt, aber wird benötigt um den MouseListener zu erstellen
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+					
+			}});
+		
+
 	
 		
 		
