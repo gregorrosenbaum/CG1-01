@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
 
 public class ImageSaver {
 
-	public static void saveImage(BufferedImage img, String path) throws IOException {
+	public static void saveImage(final BufferedImage img, final String path) throws IOException {
 		saveImageToPNG(img, new File(path));
 	}
 
-	public static void saveImageToPNG(BufferedImage img, File file) throws IOException {
+	public static void saveImageToPNG(final BufferedImage img, final File file) throws IOException {
 			ImageIO.write(img, "png", file);
 	}
 
@@ -69,17 +69,17 @@ public class ImageSaver {
 		myFrame.setSize(WIDTH, HEIGHT);
 		myFrame.setVisible(true);
 
-		JMenuBar menubar = new JMenuBar();
-		myFrame.setJMenuBar(menubar);
+		final JMenuBar menuBar = new JMenuBar();
+		myFrame.setJMenuBar(menuBar);
 
-		JMenu datei = new JMenu("Datei");
-		menubar.add(datei);
-		JMenuItem dateispeichern = new JMenuItem("Datei speichern");
-		datei.add(dateispeichern);
+		final JMenu file = new JMenu("Datei");
+		menuBar.add(file);
+		final JMenuItem saveFile = new JMenuItem("Datei speichern");
+		file.add(saveFile);
 
 		final JFileChooser fileDialog = new JFileChooser();
 
-		dateispeichern.addMouseListener(new MouseListener() {
+		saveFile.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -115,7 +115,7 @@ public class ImageSaver {
 					try {
 						saveImageToPNG(canvas.getImage(), fileDialog.getSelectedFile());
 					} catch (IOException exception) {
-						JOptionPane.showMessageDialog(myFrame, "Fehler bei Dateiauswahl");
+						JOptionPane.showMessageDialog(myFrame, "Fehler bei Dateiauswahl. Datei nicht gespeichert.");
 					}
 				}
 

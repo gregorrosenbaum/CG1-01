@@ -24,8 +24,6 @@ public class ImageCanvas extends Canvas {
 		this.color = color;
 	}
 	
-	
-	
 	@Override
 	public void paint(final Graphics g) {
 		// erzeugt ein neues BufferedImage mit dem Farbtyp INT RGB
