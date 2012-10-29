@@ -9,45 +9,44 @@ import javax.swing.JFrame;
 
 public class ImageSaver {
 
-	protected final static int OFFSET_X = 15;
-	protected final static int OFFSET_Y = 35;
-
 	public static void main(String[] args) {
+
+		// unsere höhe und breite des Fensters
+		final int WIDTH = 640;
+		final int HEIGHT = 480;
+
 		final JFrame myFrame = new JFrame("Image Saver");
 
-		final ImageCanvas ic = new ImageCanvas();
+		final ImageCanvas canvas = new ImageCanvas(WIDTH, HEIGHT);
 
-		myFrame.add(ic);
+		myFrame.add(canvas);
 
 		myFrame.addComponentListener(new ComponentListener() {
 
 			@Override
 			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
+				// Hier passiert nichts, muss für den Listener aber überschrieben werden
 			}
 
 			@Override
 			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
+				// Hier passiert nichts, muss für den Listener aber überschrieben werden
 			}
 
 			@Override
 			public void componentResized(ComponentEvent e) {
-				ic.setWidth(myFrame.getWidth());
-				ic.setHeight(myFrame.getHeight());
-				ic.repaint();
+				canvas.setWidth(myFrame.getWidth());
+				canvas.setHeight(myFrame.getHeight());
+				canvas.repaint();
 			}
 
 			@Override
 			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
+				// Hier passiert nichts, muss für den Listener aber überschrieben werden
 			}
 		});
 
-		myFrame.setSize(500 + 15, 500 + 35);
+		myFrame.setSize(WIDTH, HEIGHT);
 		myFrame.setVisible(true);
 
 	}

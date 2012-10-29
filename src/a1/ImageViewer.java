@@ -21,16 +21,15 @@ public class ImageViewer extends JComponent {
 	// Der Behälter für unser Bild
 	protected BufferedImage img;
 	// Dialog-Fenster zum auswählen einer Datei
-	protected JFileChooser fileDialog;
+	protected final JFileChooser fileDialog;
 	// Filter für erlaubte Bildformate im fileDialog
 	// // TODO: Bildformate zum FILTER hinzufügen
-	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter("Images",
-			"jpg", "gif", "png");
+	protected final static FileNameExtensionFilter FILTER = new FileNameExtensionFilter("Images", "jpg", "gif", "png");
 
 	// Variablen unseres Testprogramms //
 	protected final JFrame frame;
 
-	public ImageViewer(JFrame frame) {
+	public ImageViewer(final JFrame frame) {
 		this.frame = frame;
 		fileDialog = new JFileChooser();
 		fileDialog.setFileFilter(FILTER);
@@ -54,7 +53,7 @@ public class ImageViewer extends JComponent {
 
 	// überschreibt die paint-Methode von Component, so dass das Bild gezeichnet wird
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics g) {
 		g.drawImage(img, 0, 0, null);
 	}
 
@@ -77,8 +76,8 @@ public class ImageViewer extends JComponent {
 	}
 
 	public static void main(String[] args) {
-		JFrame myFrame = new JFrame("Image Viewer");
-		ImageViewer viewer = new ImageViewer(myFrame);
+		final JFrame myFrame = new JFrame("Image Viewer");
+		final ImageViewer viewer = new ImageViewer(myFrame);
 
 		viewer.loadImage();
 		myFrame.add(viewer);
