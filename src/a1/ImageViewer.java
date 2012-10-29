@@ -8,6 +8,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 //Subklasse von JComponent, damit sie relativ leicht überall eingebunden werden kann
@@ -79,10 +82,24 @@ public class ImageViewer extends JComponent {
 		final JFrame myFrame = new JFrame("Image Viewer");
 		final ImageViewer viewer = new ImageViewer(myFrame);
 
+		JMenuBar menubar = new JMenuBar();
+		myFrame.setJMenuBar(menubar);
+		
+
 		viewer.loadImage();
 		myFrame.add(viewer);
 
 		myFrame.setSize(viewer.getImageWidth(), viewer.getImageHeight());
 		myFrame.setVisible(true);
+
+		
+		JMenu neuesBild = new JMenu("Neues Bild");
+		menubar.add(neuesBild);
+		JMenuItem bildLaden = new JMenuItem("Bild laden");
+		neuesBild.add(bildLaden);
+		
+	
+		
+		
 	}
 }
