@@ -67,3 +67,4 @@ public class ImageCanvas extends Canvas {
 	}
 
 }
+
