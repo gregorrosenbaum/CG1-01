@@ -27,6 +27,9 @@ public class ImageCanvas extends Canvas {
 	// our variables can be changed therefore are not static
 	protected BufferedImage img;
 	protected int width;
+	/**
+	 * 
+	 */
 	protected int height;
 	protected Color color;
 
@@ -39,7 +42,7 @@ public class ImageCanvas extends Canvas {
 	 * @param height
 	 *            the height of the image.
 	 */
-	public ImageCanvas(int width, int height) {
+	public ImageCanvas(final int width, final int height) {
 		this(width, height, Color.red);
 	}
 
